@@ -1,3 +1,15 @@
+import { DefaultTheme } from 'styled-components';
+
+type Variants = 'primary' | 'secondary' | 'tertiary';
+
+export interface ThemeProps {
+  theme: DefaultTheme;
+}
+
+export interface VariantProps extends ThemeProps {
+  variant: 'primary' | 'secondary' | 'tertiary';
+}
+
 export const theme = {
   /** The border radius. */
   borderRadius: '15px',
@@ -11,9 +23,6 @@ export const theme = {
   /** The tertiary color. */
   tertiary: 'red',
 
-  /** The complement to the primary color. */
-  complementary: 'green',
-
   /** The text color for primary color backgrounds. */
   textPrimary: 'white',
 
@@ -22,4 +31,22 @@ export const theme = {
 
   /** The text color for tertiary color backgrounds. */
   textTertiary: 'black',
+}
+
+export function getVariant({ theme, variant }: VariantProps): string {
+  switch (variant) {
+    case 'primary': return theme.primary;
+    case 'secondary': return theme.secondary;
+    case 'tertiary': return theme.tertiary;
+    default: throw new Error(`Invalid variant type: ${variant}`);
+  }
+}
+
+export function getVariantText({ theme, variant }: VariantProps): string {
+  switch (variant) {
+    case 'primary': return theme.textPrimary;
+    case 'secondary': return theme.textSecondary;
+    case 'tertiary': return theme.textTertiary;
+    default: throw new Error(`Invalid variant type: ${variant}`);
+  }
 }

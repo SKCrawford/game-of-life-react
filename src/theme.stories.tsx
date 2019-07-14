@@ -1,33 +1,17 @@
-import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-interface Props {
-  variant: 'primary' | 'secondary' | 'tertiary' | 'complementary';
-}
+import { getVariant, getVariantText, VariantProps } from './theme';
 
-const Box = styled.div<Props>`
+const Box = styled.div<VariantProps>`
   padding: 8px;
   border: 1px solid black;
-  background-color: ${p => {
-    switch (p.variant) {
-      case 'primary': return p.theme.primary;
-      case 'secondary': return p.theme.secondary;
-      case 'tertiary': return p.theme.tertiary;
-      case 'complementary': return p.theme.complementary
-    }
-  }}
+  background-color: ${getVariant};
 `
 
-const Text = styled.div<Props>`
-  color: ${p => {
-    switch (p.variant) {
-      case 'primary': return p.theme.textPrimary;
-      case 'secondary': return p.theme.textSecondary;
-      case 'tertiary': return p.theme.textTertiary;
-      case 'complementary': return p.theme.complementary;
-    }
-  }}
+const Text = styled.div<VariantProps>`
+  color: ${getVariantText};
 `
 
 storiesOf('theme', module)
@@ -51,12 +35,4 @@ storiesOf('theme', module)
         Tertiary text on tertiary background
       </Text>
     </Box>
-  ))
-  .add('primary color and complementary text', () => (
-    <Box variant="primary">
-      <Text variant="complementary">
-        Complementary text on primary background
-      </Text>
-    </Box>
   ));
-    
