@@ -1,0 +1,24 @@
+import * as React from 'react';
+import styled from 'styled-components';
+import useWindowSize from '@rehooks/window-size';
+
+import { CellStyle } from './cell.styles';
+import { UseWindowSize } from '@lib/utils';
+
+export interface Props extends UseWindowSize {
+  readonly rows: number;
+  readonly columns: number;
+  readonly state?: boolean;
+}
+
+export const StyledCell = styled.div<Props>`${CellStyle}`;
+
+export const Cell: React.SFC<Props> = props => {
+  const windowSize = useWindowSize();
+  return <Cell windowSize={windowSize} {...props} /> 
+}
+
+Cell.defaultProps = {
+  state: false,
+  windowSize: undefined,
+};
